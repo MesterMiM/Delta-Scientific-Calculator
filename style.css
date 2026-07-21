@@ -1,0 +1,206 @@
+:root {
+    --bg-body: #222327;
+    --bg-screen: #1a2235;
+    --text-glow-blue: #5bc0de;
+    --btn-dark: #2d2e32;
+    --btn-dark-shadow: #18191b;
+    --btn-accent-blue: #0d47a1;
+    --btn-accent-blue-shadow: #082b63;
+    --btn-accent-green: #198754;
+    --btn-accent-green-shadow: #146c43;
+    --text-white: #e0e0e0;
+    --text-blue: #64d2ff;
+    --text-yellow: #f1c40f;
+    --text-red: #e74c3c;
+}
+
+body {
+    background-color: #121212;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    user-select: none;
+}
+
+.calculator {
+    width: 100%;
+    max-width: 360px;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-body);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    box-sizing: border-box;
+}
+
+.display {
+    background: var(--bg-screen);
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: right;
+    border: 2px solid #2a3b5c;
+    box-shadow: inset 0 5px 15px rgba(0,0,0,0.5), 0 0 10px rgba(91, 192, 222, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    white-space: pre-wrap; /* اجازه شکستن خطوط */
+    word-wrap: break-word; /* شکستن کلمات طولانی برای جلوگیری از اسکرول افقی */
+    overflow-wrap: break-word;
+    overflow-x: hidden; /* بستن کامل اسکرول افقی */
+    overflow-y: auto; /* فعال کردن اسکرول عمودی در صورت نیاز */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* همیشه متن را به پایین و سمت راست هدایت می‌کند */
+    align-items: flex-end;
+}
+
+.status-bar { font-size: 0.7em; text-align: left; height: 15px; font-weight: bold; }
+#shift-indicator { color: var(--text-yellow); }
+#alpha-indicator { color: var(--text-red); }
+
+.history { font-size: 1em; color: rgba(91, 192, 222, 0.5); min-height: 20px; overflow: hidden; }
+.result { font-size: 2em; color: var(--text-glow-blue); text-shadow: 0 0 8px rgba(91, 192, 222, 0.6); overflow-x: auto;    word-wrap: break-word;      /* شکستن متن‌های طولانی */
+    word-break: break-all;      /* شکستن اعداد به هم چسبیده */
+    white-space: pre-wrap;      /* حفظ فاصله‌ها و اعمال شکستگی خط */
+    overflow-x: hidden;         /* مخفی کردن کامل اسکرول افقی */
+    overflow-y: auto; }
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    flex-grow: 1;
+}
+
+button {
+    background: var(--btn-dark);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--text-white);
+    box-shadow: 0 4px 0 var(--btn-dark-shadow), 0 5px 8px rgba(0,0,0,0.3);
+    transition: transform 0.1s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button:active { transform: translateY(4px); box-shadow: 0 0 0 var(--btn-dark-shadow); }
+
+/* لیبل‌های شیفت (بالای دکمه) */
+.shift-label {
+    font-size: 0.6em;
+    color: var(--text-yellow);
+    position: absolute;
+    top: 2px;
+}
+
+.btn-sci { font-size: 0.9em; color: var(--text-blue); padding-top: 10px; }
+.btn-ctrl { font-size: 0.85em; color: #aaa; }
+.ac-btn, .del-btn { color: var(--text-red); }
+#btn-shift { color: var(--text-yellow); }
+#btn-alpha { color: var(--text-red); }
+
+/* ردیف پایین برای مساوی و ارسال */
+.bottom-action-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    height: 60px;
+}
+
+.btn-equal {
+    flex: 4; /* 4 پنجم عرض */
+    background: var(--btn-accent-blue);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--btn-accent-blue-shadow);
+    font-size: 1.5em;
+}
+
+.btn-send {
+    flex: 1; /* 1 پنجم عرض */
+    background: var(--btn-accent-green);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--btn-accent-green-shadow);
+    font-size: 0.9em;
+}
+
+/* استایل مودال اشتراک‌گذاری */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 100;
+}
+.modal-content {
+    background: var(--bg-body); padding: 20px; border-radius: 10px;
+    text-align: center; color: white; width: 80%;
+}
+.modal-content button {
+    width: 100%; padding: 10px; margin: 5px 0;
+    font-size: 1.1em;
+}
+.cancel-btn { background: var(--text-red) !important; color: white; }
+
+/* بزرگتر کردن فونت زرد رنگ روی دکمه‌ها */
+.shift-label {
+    font-size: 14px !important;
+    font-weight: bold;
+    color: #ffcc00; /* رنگ زرد */
+}
+
+/* ظاهر پنجره‌های تاریخچه و ارسال (شفاف و تیره) */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* پس‌زمینه شفاف */
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(30, 34, 45, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    min-width: 280px;
+    border: 1px solid #444;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.modal-content button {
+    background: #5bc0de;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+/* استایل لیست تاریخچه */
+.history-item {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 18px;
+    text-align: right;
+    letter-spacing: 1px;
+}
+.history-item:last-child {
+    border-bottom: none;
+}

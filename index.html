@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sci Calc</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- اضافه کردن کتابخانه ضروری WebXDC -->
+    <script src="webxdc.js"></script>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="status-bar">
+                <span id="shift-indicator"></span>
+            </div>
+            <div class="history" id="history"></div>
+            <div class="result" id="result">0</div>
+        </div>
+        
+        <div class="keys">
+            <!-- ردیف اول: از چپ به راست (شیفت، هیستوری، ای سی، دیل) -->
+            <button class="btn-ctrl" onclick="toggleShift()" id="btn-shift">SHIFT</button>
+            <button class="btn-ctrl" onclick="showHistory()" id="btn-history">HIST</button>
+            <button class="btn-ctrl ac-btn" onclick="clearAll()">AC</button>
+            <button class="btn-ctrl del-btn" onclick="deleteChar()">⌫</button>
+            
+            <!-- ردیف دوم: سین، کوس، تان، لوگ -->
+            <button class="btn-sci shiftable" onclick="appendSci('sin', 'asin')">
+                <span class="shift-label">sin⁻¹</span>
+                sin
+            </button>
+            <button class="btn-sci shiftable" onclick="appendSci('cos', 'acos')">
+                <span class="shift-label">cos⁻¹</span>
+                cos
+            </button>
+            <button class="btn-sci shiftable" onclick="appendSci('tan', 'atan')">
+                <span class="shift-label">tan⁻¹</span>
+                tan
+            </button>
+            <button class="btn-sci shiftable" onclick="appendSci('log', '10^')">
+                <span class="shift-label">10^</span>
+                log
+            </button>
+
+            <!-- ردیف سوم: توان 2، توان وای، پرانتزها -->
+            <button class="btn-sci shiftable" onclick="appendSci('^2', 'sqrt')">
+                <span class="shift-label">√</span>
+                x²
+            </button>
+            <button class="btn-sci shiftable" onclick="appendSci('^', 'cbrt')">
+                <span class="shift-label">³√</span>
+                x^y
+            </button>
+            <button class="btn-ctrl" onclick="appendValue('(')">(</button>
+            <button class="btn-ctrl" onclick="appendValue(')')">)</button>
+            
+            <!-- اعداد و عملگرها -->
+            <button class="btn-num" onclick="appendValue('7')">7</button>
+            <button class="btn-num" onclick="appendValue('8')">8</button>
+            <button class="btn-num" onclick="appendValue('9')">9</button>
+            <button class="btn-op" onclick="appendValue('÷')">÷</button>
+            
+            <button class="btn-num" onclick="appendValue('4')">4</button>
+            <button class="btn-num" onclick="appendValue('5')">5</button>
+            <button class="btn-num" onclick="appendValue('6')">6</button>
+            <button class="btn-op" onclick="appendValue('×')">×</button>
+            
+            <button class="btn-num" onclick="appendValue('1')">1</button>
+            <button class="btn-num" onclick="appendValue('2')">2</button>
+            <button class="btn-num" onclick="appendValue('3')">3</button>
+            <button class="btn-op" onclick="appendValue('-')">-</button>
+            
+            <button class="btn-num" onclick="appendValue('0')">0</button>
+            <button class="btn-num" onclick="appendValue('.')">.</button>
+            <button class="btn-sci shiftable" onclick="appendSci('π', 'e')">
+                <span class="shift-label">e</span>
+                π
+            </button>
+            <button class="btn-op" onclick="appendValue('+')">+</button>
+        </div>
+        
+        <!-- ردیف پایین: ارسال سمت چپ، مساوی سمت راست -->
+        <div class="bottom-action-row">
+            <button class="btn-send" onclick="openShareModal()">Send</button>
+            <button class="btn-equal" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <!-- دیالوگ انتخاب نوع ارسال -->
+    <div id="share-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3>Share format?</h3>
+            <button onclick="shareResult('text')">Text</button>
+            <button onclick="shareResult('image')">Image</button>
+            <button onclick="closeShareModal()" class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Canvas مخفی برای تولید تصویر -->
+    <canvas id="render-canvas" width="400" height="200" style="display:none;"></canvas>
+<!-- اضافه کردن این بخش به پایین فایل (قبل از تگ پایان body) -->
+<div id="history-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <h3>History (Last 5)</h3>
+        <div id="history-list"></div>
+        <button onclick="closeHistoryModal()" class="cancel-btn" style="margin-top: 15px; background: #d9534f; border: none; padding: 10px; color: white; border-radius: 5px;">Close</button>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

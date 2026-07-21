@@ -1,0 +1,4 @@
+name = "Scientific Calculator"
+subtitle = "Advanced engineering calculator with history and share features"
+description = "A powerful, responsive, and keyboard-friendly scientific calculator built for Delta Chat. Supports sending results as text or images."
+source_code_url = "https://github.com/MesterMiM/Delta-Scientific-Calculator"
