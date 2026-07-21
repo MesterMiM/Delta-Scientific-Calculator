@@ -7,8 +7,8 @@
 
 <p align="center">
   <img src="./screenshot1.jpg" width="250" alt="Calculator Main Screen" />
-  <img src="./screenshot2.png" width="250" alt="Calculator Scientific Functions" />
-  <img src="./screenshot3.png" width="250" alt="Calculator History Modal" />
+  <img src="./screenshot2.jpg" width="250" alt="Calculator Scientific Functions" />
+  <img src="./screenshot3.jpg" width="250" alt="Calculator History Modal" />
 </p>
 ## 📦 How to Build and Use (WebXDC)
 To use this calculator inside Delta Chat, you need to package it as a `.xdc` file:
