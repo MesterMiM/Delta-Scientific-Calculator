@@ -28,6 +28,6 @@ Feel free to check the [Issues page](https://github.com/MesterMiM/Delta-Scientif
 This project is open-source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
-**Mester Thirteen (Mr. 13)**
+**Mester Morgan**
 - GitHub: [@MesterMiM](https://github.com/MesterMiM)
 - Ecosystem: Delta Chat (WebXDC) Developer
