@@ -204,3 +204,31 @@ button:active { transform: translateY(4px); box-shadow: 0 0 0 var(--btn-dark-sha
 .history-item:last-child {
     border-bottom: none;
 }
+
+/* ===== رفع مشکل نمایش در گوشی‌های کوچکتر و قدیمی (مثل J7) ===== */
+@media screen and (max-width: 450px), screen and (max-height: 750px) {
+    .keys {
+        gap: 5px !important; /* کاهش فاصله بین دکمه‌ها برای باز شدن فضا */
+    }
+    
+    .keys button {
+        min-height: 42px !important; /* جلوگیری از بیش از حد باریک شدن دکمه‌ها */
+        font-size: 16px !important; /* سایز فونت پایه کمی کوچکتر */
+        padding: 4px 2px !important; /* کاهش فضای خالی داخل دکمه‌ها */
+    }
+
+    /* تنظیم اختصاصی دکمه‌های علمی که دو خط متن دارند */
+    .btn-sci, .btn-ctrl, .shiftable {
+        font-size: 13px !important; /* کوچک کردن فونت توابع */
+        line-height: 1.1 !important; /* این خط تداخل و روی هم افتادن نوشته‌ها را حل می‌کند */
+    }
+
+    /* دکمه‌های پایین (مساوی و ارسال) */
+    .bottom-action-row {
+        gap: 5px !important;
+    }
+    
+    .bottom-action-row button {
+        min-height: 48px !important;
+    }
+}
